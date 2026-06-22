@@ -4,11 +4,11 @@ A production-style backend authentication and authorization system built with No
 
 This project demonstrates secure user authentication, role-based authorization, password hashing, protected routes, middleware usage, and admin-only operations.
 
-⸻
+---
 
-🚀 Features
+## Features
 
-Authentication
+### Authentication
 
 - User Registration
 - User Login
@@ -19,45 +19,45 @@ Authentication
 - Protected Profile Route
 - User Logout
 
-Authorization
+### Authorization
 
 - Role-Based Access Control (RBAC)
 - USER Role
 - ADMIN Role
 - Admin-Only Routes
 
-Admin Features
+### Admin Features
 
 - Get All Registered Users
 - Delete Users
 
-⸻
+---
 
-🛠️ Tech Stack
+## Tech Stack
 
-Backend
+### Backend
 
 - Node.js
 - Express.js
 
-Database
+### Database
 
 - MongoDB Atlas
 - Mongoose
 
-Authentication & Security
+### Authentication & Security
 
 - JSON Web Token (JWT)
 - bcrypt
 - cookie-parser
 
-Environment Management
+### Environment Management
 
 - dotenv
 
-⸻
+---
 
-📁 Project Structure
+## Project Structure
 
 auth-vault/
 │
@@ -83,78 +83,96 @@ auth-vault/
 ├── package.json
 └── README.md
 
-⸻
+---
 
-⚙️ Installation
+## Installation
 
-Clone Repository
+### Clone Repository
 
+```
 git clone <repository-url>
 cd auth-vault
+```
 
-Install Dependencies
+### Install Dependencies
 
+```
 npm install
+```
 
-Install Development Dependency
+### Install Development Dependency
 
+```
 npm install --save-dev nodemon
+```
 
-⸻
+---
 
-🔑 Environment Variables
+## Environment Variables
 
 Create a .env file in the root directory.
 
+```
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
+```
 
-⸻
+---
 
-▶️ Run Project
+## Run Project
 
-Production
+### Production
 
+```
 node index.js
+```
 
-Development
+### Development
 
+```
 npm run dev
+```
 
 Example script in package.json:
 
+```
 "scripts": {
 "start": "node index.js",
 "dev": "nodemon index.js"
 }
+```
 
-⸻
+---
 
-📚 Database Schema
+## Database Schema
 
-User
+### User
 
+```
 {
 name: String,
 email: String,
 password: String,
 role: String
 }
+```
 
-Example User Document
+### Example User Document
 
+```
 {
-"\_id": "123456",
+"_id": "123456",
 "name": "Vinay",
 "email": "vinay@gmail.com",
 "password": "$2b$10$hashedpassword...",
 "role": "USER"
 }
+```
 
-⸻
+---
 
-🔐 Authentication Flow
+## Authentication Flow
 
 User Login
 ↓
@@ -172,9 +190,9 @@ JWT Verified
 ↓
 Access Granted
 
-⸻
+---
 
-🛡️ Authorization Flow
+## Authorization Flow
 
 Request
 ↓
@@ -188,40 +206,44 @@ Role Checked
 ↓
 Allow / Reject
 
-⸻
+---
 
-📌 API Endpoints
+## API Endpoints
 
-Authentication Routes
+### Authentication Routes
 
-Register User
+#### Register User
 
 POST /auth/register
 
 Request Body:
 
+```
 {
 "name": "Vinay",
 "email": "vinay@gmail.com",
 "password": "123456"
 }
+```
 
-⸻
+---
 
-Login User
+#### Login User
 
 POST /auth/login
 
 Request Body:
 
+```
 {
 "email": "vinay@gmail.com",
 "password": "123456"
 }
+```
 
-⸻
+---
 
-Get Profile
+#### Get Profile
 
 GET /auth/profile
 
@@ -229,27 +251,27 @@ Protected Route
 
 Requires valid JWT cookie.
 
-⸻
+---
 
-Logout User
+#### Logout User
 
 POST /auth/logout
 
 Clears authentication cookie.
 
-⸻
+---
 
-Admin Routes
+### Admin Routes
 
-Get All Users
+#### Get All Users
 
 GET /admin/users
 
 Admin Only
 
-⸻
+---
 
-Delete User
+#### Delete User
 
 DELETE /admin/user/:id
 
@@ -259,9 +281,9 @@ Example:
 
 DELETE /admin/user/123456789
 
-⸻
+---
 
-🧠 Concepts Learned
+## Concepts Learned
 
 This project covers:
 
@@ -281,9 +303,9 @@ This project covers:
 - CRUD Operations
 - Error Handling
 
-⸻
+---
 
-🔒 Security Practices Implemented
+## Security Practices Implemented
 
 - Password Hashing with bcrypt
 - JWT Authentication
@@ -293,9 +315,9 @@ This project covers:
 - Environment Variables for Secrets
 - Password Never Returned in API Responses
 
-⸻
+---
 
-🎯 Learning Outcomes
+## Learning Outcomes
 
 After completing this project, I can explain:
 
@@ -310,9 +332,9 @@ After completing this project, I can explain:
 9. CRUD Operations with MongoDB
 10. Secure Backend Development Fundamentals
 
-⸻
+---
 
-🚀 Future Improvements
+## Future Improvements
 
 - Refresh Tokens
 - Email Verification
@@ -324,9 +346,9 @@ After completing this project, I can explain:
 - Docker Support
 - Unit & Integration Testing
 
-⸻
+---
 
-👨‍💻 Author
+## Author
 
 Vinay Kumar
 
