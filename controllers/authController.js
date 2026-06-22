@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 async function handleRegister(req, res) {
   try {
     // 1. Validate request body exists
@@ -71,14 +71,103 @@ async function handleRegister(req, res) {
   }
 }
 
+async function getProfile(req, res) {
+  try {
+    const { id } = req.user;
+    // console.log(id);
+    const user = await User.findOne({
+      _id: id,
+    }).select("-password");
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Profile not found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      user: user,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: err.message,
+    });
+  }
+}
+
 async function handleLogin(req, res) {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({
+        sucess: false,
+        message: "Enter required fields",
+      });
+    }
+
+    const user = await User.findOne({
+      email: email,
+    });
+    //Now we will get a user object
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found with this Credentials!",
+      });
+    }
+
+    const isPassCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isPassCorrect) {
+      return res.status(404).json({
+        success: false,
+        message: "Invalid Credentials",
+      });
+    }
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      },
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+    return res.status(201).json({
+      success: true,
+      message: "User Logged In Successfully",
+      Wish: `Welcome on board ${user.name}`,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: err.message,
+    });
+  }
+}
+
+async function handleLogout(req, res) {
+  const token = req.cookies.token;
+  res.clearCookie("token");
   return res.status(200).json({
     success: true,
-    message: "User Logged in successfully ",
+    message: "Logged out Successfully",
   });
 }
 
 module.exports = {
   handleRegister,
   handleLogin,
+  getProfile,
+  handleLogout,
 };
